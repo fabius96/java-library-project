@@ -2,8 +2,10 @@ package test.com.survivalcoding.library.data;
 
 import static org.junit.Assert.assertEquals;
 import java.util.Date;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
+import com.survivalcoding.library.data.Data;
 import com.survivalcoding.library.data.UserRepositoryImpl;
 import com.survivalcoding.library.domain.model.User;
 
@@ -17,7 +19,26 @@ public class UserRepositoryImplTest {
 
     @Before
     public void setUp() throws Exception {
-        repository = new UserRepositoryImpl();
+        repository = new UserRepositoryImpl(new Data<User>() {
+            
+            @Override
+            public void save(List<User> items) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public List<User> load() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+            
+            @Override
+            public void backup() {
+                // TODO Auto-generated method stub
+                
+            }
+        });
     }
 
     @Test

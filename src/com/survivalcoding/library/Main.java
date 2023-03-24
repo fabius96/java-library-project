@@ -2,6 +2,7 @@ package com.survivalcoding.library;
 
 import java.util.List;
 import java.util.Scanner;
+import com.survivalcoding.library.data.UserCsvFileData;
 import com.survivalcoding.library.data.UserRepositoryImpl;
 import com.survivalcoding.library.domain.model.User;
 import com.survivalcoding.library.domain.repository.UserRepository;
@@ -11,7 +12,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
-        UserContoller userContoller = new UserContoller(new UserRepositoryImpl());
+        UserContoller userContoller = new UserContoller(
+                new UserRepositoryImpl(new UserCsvFileData())
+        );
 
         boolean isExit = false;
         while (!isExit) {

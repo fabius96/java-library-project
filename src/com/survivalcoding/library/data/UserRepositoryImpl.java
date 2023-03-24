@@ -7,7 +7,17 @@ import com.survivalcoding.library.domain.model.User;
 import com.survivalcoding.library.domain.repository.UserRepository;
 
 public class UserRepositoryImpl implements UserRepository {
+    private Data<User> data;
+    
     private List<User> users = new ArrayList<>();
+    
+    public UserRepositoryImpl() {
+        
+    }
+    
+    public UserRepositoryImpl(Data<User> data) {
+        this.data = data;
+    }
 
     @Override
     public void addUser(User user) {
@@ -17,6 +27,11 @@ public class UserRepositoryImpl implements UserRepository {
             throw new IllegalArgumentException("동일한 ID가 존재합니다");
         }
         users.add(user);
+        
+        // File, Cloud, Db
+        if (data != null) {
+            data.save(users);
+        }
     }
 
     @Override
@@ -31,12 +46,18 @@ public class UserRepositoryImpl implements UserRepository {
         }
         if (index != -1) {
             users.set(index, user);
+            if (data != null) {
+                data.save(users);
+            }
         }
     }
 
     @Override
     public void deleteUser(User user) {
         users.remove(user);
+        if (data != null) {
+            data.save(users);
+        }
     }
 
     @Override
